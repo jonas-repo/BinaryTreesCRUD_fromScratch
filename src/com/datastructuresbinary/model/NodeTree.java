@@ -7,7 +7,7 @@ public class NodeTree {
 	public boolean add(int key, Object data)
 	{
 		boolean comp = false;
-		if(root  == null)
+		if(root  == null) //there is not a tree we have to create a new root
 		{
 			root = new Node(key,data);
 		}
@@ -17,9 +17,11 @@ public class NodeTree {
 			Node newNode = new Node(key,data);
 			
 			
-			while(temp != null)
+			while(temp != null) //we have to iterate in the tree until get the last node without value
 			{
-				if(temp.getKey() > key)
+				
+				//we have to assign values to the tree depending of the key that we have if key is bigger store to the righ and if is less store at the left
+				if(temp.getKey() > key) 
 				{
 					if(temp.getNodeLeft() != null)
 					{
@@ -67,10 +69,10 @@ public class NodeTree {
 	
 	public boolean update(int key, Object value)
 	{
-		Node temp = searchNode(key);
-		if(temp != null)
+		Node temp = searchNode(key); //we search the node by key
+		if(temp != null) //if the node exist we change the value of that node
 		{
-			temp.setData(value);
+			temp.setData(value); 
 			return true;
 		}
 		
@@ -80,8 +82,8 @@ public class NodeTree {
 	public Node searchNode(int key)
 	{
 		Node temp = root;
-		while(temp != null)
-		{
+		while(temp != null) //iterate in the tree until find the key of the node 
+		{					// and we divide the search by searching according to the key value we go to left or right in the tree
 			if(temp.getKey() == key)
 			{
 				break;
@@ -112,7 +114,7 @@ public class NodeTree {
 		Node oneBefore = null;
 		Node aux = null;
 
-		while(temp != null)
+		while(temp != null) 
 		{
 			if(temp.getKey() == key)
 			{
@@ -120,7 +122,7 @@ public class NodeTree {
 			}
 			else
 			{
-				oneBefore = temp;
+				oneBefore = temp; // we have to store the node before the node we want to delete to put the next node to null
 				if(temp.getKey() > key)
 				{
 					temp = temp.getNodeLeft();
@@ -157,9 +159,10 @@ public class NodeTree {
 				}
 				
 			}
+			//we copy all the data to the node we have to delete
 			aux.setData(temp.getData());
 			aux.setKey(temp.getKey());
-			oneBefore.setNodeLeft(null);
+			oneBefore.setNodeLeft(null); //we delete the last node that is bigger than the node we have to delete because all the values are stored in our node aux
 			temp = null;
 			return true;
 		}
